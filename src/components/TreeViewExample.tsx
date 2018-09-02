@@ -85,7 +85,15 @@ export default class TreeViewExample extends React.Component<object, State> {
         ]
       })
     }
+  }
 
+  deleteItem = () => {
+    const { treeViewData, selectedTreeViewItem } = this.state
+    if (selectedTreeViewItem) {
+      this.setState({
+        treeViewData: treeViewData.filter(item => item.key !== selectedTreeViewItem.key)
+      })
+    }
   }
 
   render() {
@@ -94,6 +102,10 @@ export default class TreeViewExample extends React.Component<object, State> {
       <div className="tree-view-container">
         <button onClick={this.addGroup}>Add Group</button>
         <button onClick={this.addNode}>Add Node</button>
+        {
+          selectedTreeViewItem &&
+          <button onClick={this.deleteItem}>Delete Item</button>
+        }
         <TreeView
           layer={0}
           data={treeViewData}
@@ -101,6 +113,9 @@ export default class TreeViewExample extends React.Component<object, State> {
           selectedItem={selectedTreeViewItem}
           onItemSelected={this.onTreeViewItemSelected}
           onGroupExpandToggle={this.onTreeViewItemExpandToggle}/>
+        <p style={{paddingTop: '60px'}}>
+          { JSON.stringify(this.state.treeViewData) }
+        </p>
       </div>
     )
   }
