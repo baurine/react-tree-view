@@ -18,6 +18,12 @@ const initialState: State = {
   selectedTreeViewItem: null
 }
 
+const findParentKey = (selectedItem: IItem | null) => {
+  if (selectedItem === null) return ''
+  if (selectedItem.kind === 'group') return selectedItem.key
+  return selectedItem.parentKey
+}
+
 export default class TreeViewExample extends React.Component<object, State> {
   readonly state = initialState
 
@@ -36,10 +42,58 @@ export default class TreeViewExample extends React.Component<object, State> {
     this.setState({treeViewData: newItems})
   }
 
+  addGroup = () => {
+    this.addItem('group')
+  }
+
+  addNode = () => {
+    this.addItem('node')
+  }
+
+  addItem = (kind: 'group' | 'node') => {
+    const name = prompt("input group name:")
+    if (name && name.length > 0) {
+      const { treeViewData, selectedTreeViewItem } = this.state
+      const parentKey = findParentKey(selectedTreeViewItem)
+      let key
+      if (parentKey === '') {
+        key = treeViewData.length + ''
+      } else {
+        key = parentKey + '_' + treeViewData.length
+      }
+      let item: IGroup | INode
+      if (kind === 'group') {
+        item = {
+          key,
+          parentKey,
+          kind,
+          name,
+          expand: false
+        }
+      } else {
+        item = {
+          key,
+          parentKey,
+          kind,
+          name,
+        }
+      }
+      this.setState({
+        treeViewData: [
+          ...treeViewData,
+          item
+        ]
+      })
+    }
+
+  }
+
   render() {
     const { treeViewData, selectedTreeViewItem } = this.state
     return (
       <div className="tree-view-container">
+        <button onClick={this.addGroup}>Add Group</button>
+        <button onClick={this.addNode}>Add Node</button>
         <TreeView
           layer={0}
           data={treeViewData}
