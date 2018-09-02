@@ -6,3 +6,7 @@
 .tree-item {
   padding: 4px;
 }
+
+.tree-item.selected {
+  background: orange;
+}
