@@ -81,7 +81,7 @@ export default class TreeView extends React.Component<Props, object> {
                           {selected: checkItemSelected(item, selectedItem)})}
              style={{paddingLeft: `${20*layer}px`}}
              onClick={(e) => this.clickGroup(e, item)}>
-          { item.expand ? ' - ' : ' + '}
+          { item.expand ? '- ' : '+ '}
           { item.name }
         </div>
         {

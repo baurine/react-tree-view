@@ -1,6 +1,6 @@
 import * as React from 'react'
 import TreeView, { INode, IGroup, IItem } from './TreeView'
-import './TreeView.css'
+import './TreeViewExample.css'
 
 type State = {
   treeViewData: (INode | IGroup)[]
@@ -9,11 +9,11 @@ type State = {
 
 const initialState: State = {
   treeViewData: [
-    {key: '1', parentKey: '', kind: 'node',  name: 'node 1'},
-    {key: '2', parentKey: '', kind: 'group', name: 'group 1', expand: false},
-    {key: '3', parentKey: '', kind: 'node',  name: 'node 2'},
-    {key: '4', parentKey: '', kind: 'group', name: 'group 2', expand: false},
-    {key: '4_1', parentKey: '4', kind: 'node', name: 'node 3'}
+    {key: '1',   parentKey: '',  kind: 'node',  name: 'node 1'},
+    {key: '2',   parentKey: '',  kind: 'group', name: 'group 1', expand: false},
+    {key: '3',   parentKey: '',  kind: 'node',  name: 'node 2'},
+    {key: '4',   parentKey: '',  kind: 'group', name: 'group 2', expand: false},
+    {key: '4_1', parentKey: '4', kind: 'node',  name: 'node 3'}
   ],
   selectedTreeViewItem: null
 }
@@ -100,12 +100,15 @@ export default class TreeViewExample extends React.Component<object, State> {
     const { treeViewData, selectedTreeViewItem } = this.state
     return (
       <div className="tree-view-container">
-        <button onClick={this.addGroup}>Add Group</button>
-        <button onClick={this.addNode}>Add Node</button>
-        {
-          selectedTreeViewItem &&
-          <button onClick={this.deleteItem}>Delete Item</button>
-        }
+        <div className="action-buttons">
+          <button onClick={this.addGroup}>Add Group</button>
+          <button onClick={this.addNode}>Add Node</button>
+          {
+            selectedTreeViewItem &&
+            <button onClick={this.deleteItem}>Delete Item</button>
+          }
+        </div>
+
         <TreeView
           layer={0}
           data={treeViewData}
@@ -113,9 +116,15 @@ export default class TreeViewExample extends React.Component<object, State> {
           selectedItem={selectedTreeViewItem}
           onItemSelected={this.onTreeViewItemSelected}
           onGroupExpandToggle={this.onTreeViewItemExpandToggle}/>
-        <p style={{paddingTop: '60px'}}>
-          { JSON.stringify(this.state.treeViewData) }
-        </p>
+
+        <div className="log-box">
+          this.state.treeViewData:
+          <p>[</p>
+          {
+            this.state.treeViewData.map(item => <p key={item.key}>{JSON.stringify(item)}</p>)
+          }
+          <p>]</p>
+        </div>
       </div>
     )
   }

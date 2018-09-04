@@ -1,0 +1,24 @@
+.tree-view-container {
+  text-align: left;
+  padding: 40px;
+}
+
+.tree-view-container .tree-item {
+  padding: 4px;
+}
+
+.tree-view-container .tree-item.selected {
+  background: orange;
+}
+
+.tree-view-container .action-buttons {
+  margin-bottom: 20px;
+}
+
+.tree-view-container .action-buttons button {
+  margin-right: 8px;
+}
+
+.tree-view-container .log-box {
+  margin-top: 60px;
+}
