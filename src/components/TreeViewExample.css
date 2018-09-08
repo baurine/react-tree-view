@@ -3,6 +3,10 @@
   padding: 40px;
 }
 
+.tree-view-container .tree-view {
+  width: 500px;
+}
+
 .tree-view-container .tree-item {
   padding: 4px;
 }
@@ -12,6 +16,7 @@
 }
 
 .tree-view-container .action-buttons {
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 

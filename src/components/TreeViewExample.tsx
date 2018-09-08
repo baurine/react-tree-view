@@ -100,6 +100,7 @@ export default class TreeViewExample extends React.Component<object, State> {
     const { treeViewData, selectedTreeViewItem } = this.state
     return (
       <div className="tree-view-container">
+        <a href='https://github.com/baurine/react-tree-view'>Go to GitHub</a>
         <div className="action-buttons">
           <button onClick={this.addGroup}>Add Group</button>
           <button onClick={this.addNode}>Add Node</button>
